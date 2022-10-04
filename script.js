@@ -9,7 +9,7 @@ textVal15 = localStorage.getItem('box15');
 textVal16 = localStorage.getItem('box16');
 textVal17 = localStorage.getItem('box17');
 
-// variables to display values on page
+// variables to display on page
 text9 = document.getElementById('event9');
 text10 = document.getElementById('event10');
 text11 = document.getElementById('event11');
@@ -20,6 +20,7 @@ text15 = document.getElementById('event15');
 text16 = document.getElementById('event16');
 text17 = document.getElementById('event17');
 
+// add a value to the display variables
 text9.value = textVal9;
 text10.value = textVal10;
 text11.value = textVal11;
@@ -30,19 +31,16 @@ text15.value = textVal15;
 text16.value = textVal16;
 text17.value = textVal17;
 
-
-
+// get todays date, time, and day of the week
 var today = moment();
 $("#currentDay").text(today.format("dddd, h:mma, MMM Do, YYYY"));
 
 //find current hour as a 0-23 value to compare to the hours of the day
 var currentHour = parseInt(today.format('H'));
 
-console.log(currentHour)
-
+// handle color assignment for time-blocks
 function colorChange(timeSlot) {
     timeSlot = document.getElementsByClassName('timeblock')
-    console.log('bozo', timeSlot);
 
     // Check every element in the timeSlot variable one at a time
     for (let i=0; i < timeSlot.length; i++) {
@@ -63,20 +61,14 @@ function colorChange(timeSlot) {
     }
 }
 
-
-
-
+// handle saving of user input
 var button = document.querySelectorAll('.btn')
 button.forEach(el => el.addEventListener('click', event => {
     var buttonNum = event.target.getAttribute("id").slice(3);
-    console.log('button #'+ buttonNum) 
     var textNum = document.getElementById('event'+buttonNum);
-    console.log('text-box',textNum);
     inputText = textNum.value;
-    console.log(inputText);
     localStorage.setItem("box"+buttonNum, JSON.stringify(inputText));
-    console.log('submitted')
 }))
 
-// Call functions
+// Call the color change function
 colorChange();
